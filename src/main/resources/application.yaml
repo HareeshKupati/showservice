@@ -1,0 +1,16 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /showservice
+spring:
+  application:
+    name: show-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/showdb?createDatabaseIfNotExist=true&useSSL=false
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
