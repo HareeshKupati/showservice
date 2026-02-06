@@ -7,6 +7,7 @@ public class SeatBookingDTO {
     private Long movieId;
     private Long theatreId;
     private Long showId;
+    private Long userId;
     private Calendar showDate;
     private List<Long> seatIds;
 
@@ -32,6 +33,14 @@ public class SeatBookingDTO {
 
     public void setShowId(Long showId) {
         this.showId = showId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Calendar getShowDate() {

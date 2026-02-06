@@ -1,10 +1,7 @@
 package com.hbk.showservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hbk.corefw.dto.DTOWrapper;
 import com.hbk.corefw.dto.Error;
-import com.hbk.corefw.dto.FieldLocation;
-import com.hbk.corefw.exception.ResourceNotFoundException;
 import com.hbk.corefw.service.CoreService;
 import com.hbk.showservice.dto.DTOUnwrapper;
 import com.hbk.showservice.dto.MovieTheatreShowDTO;
@@ -43,7 +40,7 @@ public class MovieTheatreShowService extends CoreService<MovieTheatreShowDTO, Mo
 
     @Override
     public void mapToJDO(MovieTheatreShowDTO dto, MovieTheatreShowJDO jdo) {
-        jdo.setShow(showTimeRepository.findById(dto.getShowId()).orElse(null));
+        jdo.setShowTime(showTimeRepository.findById(dto.getShowTimeId()).orElse(null));
         if(CollectionUtils.isEmpty(dto.getMovieTheatreShowSeats())){
             List<Long> seatIds = getSeatIdsForTheatre(dto.getTheatreId());
             List<MovieTheatreShowSeatJDO> movieTheatreShowSeatJDOS =

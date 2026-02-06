@@ -5,10 +5,11 @@ import com.hbk.showservice.jdo.MovieTheatreShowJDO;
 import com.hbk.showservice.jdo.MovieTheatreShowSeatJDO;
 import com.hbk.showservice.repository.MovieTheatreShowRepository;
 import com.hbk.showservice.util.SeatStatus;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -27,13 +28,22 @@ public class BookingService implements IBookingService{
                 seatBookingDTO.getShowDate(),
                 seatBookingDTO.getSeatIds());
         if(movieTheatreShows.size() != 1)
-            throw new RuntimeException("Invalid request");
+            throw new RuntimeException("Invalid Movie Show!!");
         MovieTheatreShowJDO movieTheatreShowJDO = movieTheatreShows.get(0);
         if(movieTheatreShowJDO.getMovieTheatreShowSeats() != null
-                && movieTheatreShowJDO.getMovieTheatreShowSeats().size()==seatBookingDTO.getSeatIds().size()){
-            for(MovieTheatreShowSeatJDO movieTheatreShowSeatJDO: movieTheatreShowJDO.getMovieTheatreShowSeats()){
-                movieTheatreShowSeatJDO.setSeatStatus(SeatStatus.LOCKED);
+                && movieTheatreShowJDO.getMovieTheatreShowSeats().size()==seatBookingDTO.getSeatIds().size()) {
+            boolean proceed = movieTheatreShowJDO.getMovieTheatreShowSeats().stream().allMatch(e-> SeatStatus.OPEN.equals(e.getSeatStatus()));
+            if(proceed){
+                for(MovieTheatreShowSeatJDO movieTheatreShowSeatJDO: movieTheatreShowJDO.getMovieTheatreShowSeats()){
+                    movieTheatreShowSeatJDO.setSeatStatus(SeatStatus.LOCKED);
+                    movieTheatreShowSeatJDO.setLockedBy(seatBookingDTO.getUserId());
+                    movieTheatreShowSeatJDO.setLockedTime(Calendar.getInstance());
+                }
+            } else {
+                throw new RuntimeException("Selected seats are already booked by another user...Please select available seats!!");
             }
+        } else {
+            throw new RuntimeException("Invalid request!!");
         }
         return seatBookingDTO;
     }

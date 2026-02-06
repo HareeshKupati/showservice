@@ -13,8 +13,8 @@ import java.util.List;
 public interface MovieTheatreShowRepository extends CoreRepository<MovieTheatreShowJDO, Long> {
 
     @Query("select mts from MovieTheatreShowJDO mts JOIN FETCH mts.movieTheatreShowSeats mtss " +
-            "where mts.movieId = :movieId and mts.show.id = :showId and mts.theatreId = :theatreId " +
-            "and mts.showDate = :showDate and mtss.seatId IN :seatIds and mtss.seatStatus IN (OPEN)")
+            "where mts.movieId = :movieId and mts.showTime.id = :showId and mts.theatreId = :theatreId " +
+            "and mts.showDate = :showDate and mtss.seatId IN :seatIds")
     List<MovieTheatreShowJDO> findByMovieShowAndTheatreId(@Param("movieId") Long movieId,
                                                           @Param("showId") Long showId,
                                                           @Param("theatreId") Long theatreId,

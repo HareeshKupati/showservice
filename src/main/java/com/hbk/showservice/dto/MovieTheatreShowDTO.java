@@ -10,9 +10,9 @@ public class MovieTheatreShowDTO extends CoreIdDTO {
 
     private Long movieId;
 
-    private Long showId;
+    private Long showTimeId;
 
-    private ShowTimeDTO show;
+    private ShowTimeDTO showTime;
 
     private Calendar showDate;
 
@@ -34,20 +34,20 @@ public class MovieTheatreShowDTO extends CoreIdDTO {
         this.movieId = movieId;
     }
 
-    public Long getShowId() {
-        return showId;
+    public Long getShowTimeId() {
+        return showTimeId;
     }
 
-    public void setShowId(Long showId) {
-        this.showId = showId;
+    public void setShowTimeId(Long showTimeId) {
+        this.showTimeId = showTimeId;
     }
 
-    public ShowTimeDTO getShow() {
-        return show;
+    public ShowTimeDTO getShowTime() {
+        return showTime;
     }
 
-    public void setShow(ShowTimeDTO show) {
-        this.show = show;
+    public void setShowTime(ShowTimeDTO showTime) {
+        this.showTime = showTime;
     }
 
     public Calendar getShowDate() {

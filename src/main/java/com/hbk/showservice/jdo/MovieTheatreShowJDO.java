@@ -17,13 +17,13 @@ public class MovieTheatreShowJDO extends CoreIdJDO {
     private Long theatreId;
 
     @ManyToOne
-    @JoinColumn(name = "shows_id")
-    private ShowTimeJDO show;
+    @JoinColumn(name = "showtime_id")
+    private ShowTimeJDO showTime;
 
     @Column(name = "show_date")
     private Calendar showDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movieTheatreShow")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "movieTheatreShow")
     private List<MovieTheatreShowSeatJDO> movieTheatreShowSeats;
 
     public Long getTheatreId() {
@@ -42,12 +42,12 @@ public class MovieTheatreShowJDO extends CoreIdJDO {
         this.movieId = movieId;
     }
 
-    public ShowTimeJDO getShow() {
-        return show;
+    public ShowTimeJDO getShowTime() {
+        return showTime;
     }
 
-    public void setShow(ShowTimeJDO show) {
-        this.show = show;
+    public void setShowTime(ShowTimeJDO showTime) {
+        this.showTime = showTime;
     }
 
     public Calendar getShowDate() {

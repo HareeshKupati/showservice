@@ -20,7 +20,8 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<DTOWrapper<SeatBookingDTO>> create(@RequestBody SeatBookingDTO req) throws ValidationException {
-        return ResponseEntity.status(HttpStatus.OK).body(new DTOWrapper<>(service.createBooking(req)));
+        SeatBookingDTO seatBookingDTO = service.createBooking(req);
+        return ResponseEntity.status(HttpStatus.OK).body(new DTOWrapper<>(seatBookingDTO));
     }
 
     @GetMapping("/{id}")
